@@ -19,6 +19,7 @@ node {
 
     stage 'Test'
       print "Testing goes here."
+      sh "inspec exec linux-baseline"
   }
 
   catch (caughtError) {
