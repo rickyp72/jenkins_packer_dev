@@ -1,0 +1,31 @@
+{
+  "variables": {
+    "aws_access_key": "",
+    "aws_secret_key": ""
+  },
+  "builders": [{
+    "type": "amazon-ebs",
+    "region": "eu-central-1",
+    "source_ami": "ami-e4c63e8b",
+    "instance_type": "t2.micro",
+    "ssh_username": "ec2-user",
+    "ami_name": "pkr-redhat-bind{{timestamp}}",
+    "ssh_keypair_name": "aminator_kp",
+    "ssh_private_key_file": "/Users/ricky/.ssh/aminator_kp.pem"
+  }],
+  "provisioners": [{
+  "type": "shell",
+  "inline": [
+    "sleep 30"
+  ]
+ },
+  { "type": "shell",
+    "inline": [
+      "curl http://169.254.169.254/latest/meta-data/local-ipv4"
+    ]
+  },
+  { "type": "shell-local",
+  "command": "export SSH_USER=ec2-user && cp -r ~/serverspec/* . && egrep -m1 -o '[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}' build.log | xargs -I ip rake spec TARGET_HOST=ip"
+  }
+ ]
+}
