@@ -14,14 +14,7 @@
   "provisioners": [{
   "type": "shell",
   "inline": [
-    "sleep 30",
-    "sudo yum -y update",
-    "sudo yum install -y bind",
-    "sudo yum install -y ntp",
-    "sudo yum install -y ruby",
-    "sudo gem install serverspec",
-    "cd /tmp/tests",
-    "rake spec TARGET_HOST=localhost"
+    "echo 'PROVISIONING'"
   ]
 }]
 }
