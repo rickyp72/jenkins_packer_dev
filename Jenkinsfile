@@ -12,10 +12,10 @@ node {
     stage 'Validate'
       def packer_file = 'packer_aws_inspec_rhel_jenk.json'
       print "Running packer validate on : ${packer_file}"
-      sh "packer -v ; packer validate ${packer_file} | tee build.log"
+      sh "packer -v ; packer validate ${packer_file}"
 
     stage 'Build'
-      sh "packer build ${packer_file}"
+      sh "packer build ${packer_file} | tee build.log"
 
     stage 'Test'
       print "Testing goes here."
