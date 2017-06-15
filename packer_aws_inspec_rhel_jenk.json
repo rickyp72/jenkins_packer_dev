@@ -1,0 +1,45 @@
+{
+  "variables": {
+    "aws_access_key": "",
+    "aws_secret_key": ""
+  },
+  "builders": [{
+    "type": "amazon-ebs",
+    "region": "eu-central-1",
+    "source_ami": "ami-e4c63e8b",
+    "instance_type": "t2.micro",
+    "ssh_username": "ec2-user",
+    "ami_name": "pkr-redhat{{timestamp}}",
+    "ssh_keypair_name": "aminator_kp",
+    "ssh_private_key_file": "/vagrant/aminator_kp.pem"
+  }],
+  "provisioners": [
+
+    { "type": "shell",
+      "inline": [
+        "curl http://169.254.169.254/latest/meta-data/public-ipv4"
+      ]
+    },
+
+    {
+    "type": "shell",
+    "inline": [
+      "sleep 30",
+      "sudo rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm",
+      "sudo yum install -y puppetserver"
+    ]
+    },
+
+    {
+      "type": "puppet-masterless",
+      "manifest_file": "puppet/manifests/site.pp",
+      "module_paths": ["puppet/modules"],
+      "hiera_config_path": "puppet/hiera.yaml"
+    },
+
+    { "type": "shell-local",
+    "command": "egrep -m1 -o '[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}' build.log | xargs -I ip inspec exec linux-baseline -t ssh://ec2-user@ip -i /vagrant/aminator_kp.pem"
+    }
+
+ ]
+}
