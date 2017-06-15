@@ -38,7 +38,7 @@
     },
 
     { "type": "shell-local",
-    "command": "egrep -m1 -o '[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}' $JENKINS_HOME/jobs/$JOB_NAME/workspace@tmp/durable-$WORKSPACE/jenkins-log.txt | xargs -I ip inspec exec linux-baseline -t ssh://ec2-user@ip -i /var/lib/jenkins/.ssh/aminator_kp.pem"
+    "command": "egrep -m1 -o '[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}' $PWD/jenkins-log.txt | xargs -I ip inspec exec linux-baseline -t ssh://ec2-user@ip -i /var/lib/jenkins/.ssh/aminator_kp.pem"
     }
 
  ]
