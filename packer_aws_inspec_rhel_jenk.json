@@ -21,21 +21,7 @@
       ]
     },
 
-    {
-    "type": "shell",
-    "inline": [
-      "sleep 30",
-      "sudo rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm",
-      "sudo yum install -y puppetserver"
-    ]
-    },
 
-    {
-      "type": "puppet-masterless",
-      "manifest_file": "/var/lib/jenkins/puppet/manifests/site.pp",
-      "module_paths": ["/var/lib/jenkins/puppet/modules"],
-      "hiera_config_path": "/var/lib/jenkins/puppet/hiera.yaml"
-    },
 
     { "type": "shell-local",
     "command": "egrep -m1 -o '[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}' $PWD/jenkins-log.txt | xargs -I ip inspec exec linux-baseline -t ssh://ec2-user@ip -i /var/lib/jenkins/.ssh/aminator_kp.pem"
