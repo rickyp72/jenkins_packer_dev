@@ -15,7 +15,7 @@ node {
       sh "packer -v ; packer validate ${packer_file}"
 
     stage 'Build'
-      sh "packer build ${packer_file} | tee build.log"
+      sh "packer build ${packer_file}"
 
     stage 'Test'
       print "Testing goes here."
