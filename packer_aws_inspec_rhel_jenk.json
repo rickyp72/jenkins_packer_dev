@@ -21,6 +21,21 @@
       ]
     },
 
+    {
+    "type": "shell",
+    "inline": [
+      "sleep 30",
+      "sudo rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm",
+      "sudo yum install -y puppetserver"
+    ]
+    },
+
+    {
+      "type": "puppet-masterless",
+      "manifest_file": "puppet/manifests/site.pp",
+      "module_paths": ["puppet/modules"],
+      "hiera_config_path": "puppet/hiera.yaml"
+    },
 
 
     { "type": "shell-local",
