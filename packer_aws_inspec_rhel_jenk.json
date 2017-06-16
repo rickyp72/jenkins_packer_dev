@@ -32,7 +32,7 @@
 
     {
       "type": "puppet-masterless",
-      "manifest_file": "/var/lib/jenkins/puppet/manifests/site.pp",
+      "manifest_file": "$JENKINS_HOME/puppet/manifests/site.pp",
       "module_paths": ["/var/lib/jenkins/puppet/modules"],
       "hiera_config_path": "/var/lib/jenkins/puppet/hiera.yaml"
     },
