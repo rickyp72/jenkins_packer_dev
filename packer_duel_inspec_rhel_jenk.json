@@ -15,7 +15,7 @@
   },
   {
   "type": "googlecompute",
-  "account_file": "account_.json",
+  "account_file": "/vagrant/account_.json",
   "ssh_username": "rickyp72",
   "project_id": "lithe-altar-169814",
   "source_image": "rhel-7-v20170523",
