@@ -11,14 +11,17 @@ node {
 
     stage 'Validate'
       def packer_file = 'ova_creater_new.json'
+
       print "Running packer validate on : ${packer_file}"
-      sh "packer -v ; packer validate ${packer_file}"
+
+
 
     stage 'Build'
-      sh "packer build ${packer_file} | tee build.log"
+      print "building something"
 
     stage 'Test'
       print "Testing goes here."
+      sh "ls -ltr ~/"
   }
 
   catch (caughtError) {
