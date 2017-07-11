@@ -10,11 +10,7 @@ node {
       checkout scm
 
     stage 'Validate'
-<<<<<<< HEAD
       def packer_file = 'ova_creater_new.json'
-=======
-      def packer_file = 'packer_duel_inspec_rhel_jenk.json'
->>>>>>> 7fb4770465e7eb271b105676df6c832e42dede3b
       print "Running packer validate on : ${packer_file}"
       sh "packer -v ; packer validate ${packer_file}"
 
